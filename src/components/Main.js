@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 
 const Main = () => {
   const [quoteLoading, setQuoteLoading] = useState(false);
-  const [randomQuote, setRandomQuote] = useState("");
-  const [randomQuoteAuthor, setRandomQuoteAuthor] = useState("");
+  const [randomQuote, setRandomQuote] = useState(Object);
   const [tagQuery, setTagQuery] = useState("");
   const [options, setOptions] = useState([]);
+  const [bookmark,setBookmark]=useState(false)
 
   async function getRandomQuote() {
     setQuoteLoading(true);
     fetch("https://api.quotable.io/random?tags=" + tagQuery)
       .then((res) => res.json())
       .then((data) => {
-        setRandomQuote(data.content);
-        setRandomQuoteAuthor(data.author);
+        setRandomQuote(data);
+        // setRandomQuoteAuthor(data.author);
         setQuoteLoading(false);
       })
       .catch((err) => {
@@ -48,11 +48,11 @@ const Main = () => {
           <img src="./loading.svg" alt="" className=" m-auto" />
         ) : (
           <>
-            <p className="text-center text-4xl font-semibold">{randomQuote}</p>
+            <p className="text-center text-4xl font-semibold">{randomQuote.content}</p>
 
             <div className="flex justify-end gap-5 mt-10 items-center  w-full">
-              <h1 className=" text-xl">-{randomQuoteAuthor}</h1>
-              <h4>bookmark</h4>
+              <h1 className=" text-xl">-{randomQuote.author}</h1>
+              <button onClick={()=>setBookmark(!bookmark)}> <img src={`${bookmark?"./bookmarked.png":"./bookmark.png"}`} alt='bookmark' className=" max-w-10"></img></button>
             </div>
           </>
         )}
