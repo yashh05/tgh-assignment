@@ -10,9 +10,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const storedBookmarkedQuotes =JSON.parse(localStorage.getItem("bookmarkedQuotes")) || [];
+    const storedBookmarkedQuotes =JSON.parse(localStorage.getItem("bookmarked-quotes")) || [];
     dispatch(loadBookmarkedQuotes(storedBookmarkedQuotes));
-  }, [dispatch]);
+  }, []);
 
   return (
     <BrowserRouter>

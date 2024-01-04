@@ -10,6 +10,7 @@ const quotesSlice = createSlice({
   initialState,
   reducers: {
     loadBookmarkedQuotes: (state, action) => {
+        console.log(action.payload);
       state.bookmarkedQuotes = action.payload;
     },
     bookmarkQuote: (state, action) => {
@@ -23,6 +24,10 @@ const quotesSlice = createSlice({
     unbookmarkQuote: (state, action) => {
       state.bookmarkedQuotes = state.bookmarkedQuotes.filter(
         (id) => id !== action.payload
+      );
+      localStorage.setItem(
+        "bookmarked-quotes",
+        JSON.stringify(state.bookmarkedQuotes)
       );
       console.log(state.bookmarkedQuotes);
     },
