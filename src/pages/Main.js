@@ -62,14 +62,14 @@ const dispatch = useDispatch()
     <div className="flex flex-col w-full items-center gap-12">
       <div className=" w-3/5 min-h-[30vh] m-auto mt-28 bg-slate-600 rounded-lg text-white px-16 py-10">
         {quoteLoading ? (
-          <img src="./loading.svg" alt="" className=" m-auto" />
+          <img src="./resources/loading.svg" alt="" className=" m-auto" />
         ) : (
           <>
             <p className="text-center text-4xl font-semibold">{randomQuote.content}</p>
 
             <div className="flex justify-end gap-5 mt-10 items-center  w-full">
               <h1 className=" text-xl">-{randomQuote.author}</h1>
-              <button onClick={handlebookmark}> <img src={`${bookmark?"./bookmarked.png":"./bookmark.png"}`} alt='bookmark' className=" max-w-10"></img></button>
+              <button onClick={handlebookmark}> <img src={`${bookmark?"./resources/bookmarked.png":"./resources/bookmark.png"}`} alt='bookmark' className=" max-w-10"></img></button>
             </div>
           </>
         )}

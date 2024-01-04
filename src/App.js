@@ -1,5 +1,5 @@
 import "./App.css";
-import Main from "./components/Main";
+import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -35,7 +35,6 @@ function App() {
     .then((quotes)=>{
       dispatch(loadBookmarkedQuotes(quotes))
     })
-    // dispatch(loadBookmarkedQuotes(storedBookmarkedQuotes));
   }, []);
 
   return (

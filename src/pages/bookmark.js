@@ -18,7 +18,7 @@ const Bookmark = () => {
           <h4>
             {author}
           </h4>
-          <button onClick={()=>dispatch(unbookmarkQuote(quote))}><img src="./delete.png" className=' w-10 text-white' alt="delete icon" /></button>
+          <button onClick={()=>dispatch(unbookmarkQuote(quote))}><img src="./resources/delete.png" className=' w-10 text-white' alt="delete icon" /></button>
           </div>
       </div>
     )
