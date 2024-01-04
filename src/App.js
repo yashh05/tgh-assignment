@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadBookmarkedQuotes } from "./slices/quoteSlices";
+import Bookmark from "./pages/bookmark";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/bookmarks" element={<Bookmark />} />
         </Routes>
       </div>
     </BrowserRouter>
