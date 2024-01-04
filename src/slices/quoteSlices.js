@@ -2,34 +2,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  bookmarkedQuotes: [],
+  bookmarkedQuotesId:[],
+  bookmarkedQuote:[]
 };
 
 const quotesSlice = createSlice({
   name: "quotes",
   initialState,
   reducers: {
-    loadBookmarkedQuotes: (state, action) => {
-        console.log(action.payload);
-      state.bookmarkedQuotes = action.payload;
+    loadBookmarkedQuotes:(state,action)=>{
+       state.bookmarkedQuote=action.payload       
     },
     bookmarkQuote: (state, action) => {
-      state.bookmarkedQuotes.push(action.payload);
+      state.bookmarkedQuote.push(action.payload);
+      const idArray= state.bookmarkedQuote.map((quote)=> quote._id)
+
       localStorage.setItem(
         "bookmarked-quotes",
-        JSON.stringify(state.bookmarkedQuotes)
+        JSON.stringify(idArray)
       );
-      console.log(state.bookmarkedQuotes);
     },
     unbookmarkQuote: (state, action) => {
-      state.bookmarkedQuotes = state.bookmarkedQuotes.filter(
-        (id) => id !== action.payload
-      );
+      state.bookmarkedQuote = state.bookmarkedQuote.filter((quote) => quote._id !== action.payload._id);
+      const idArray= state.bookmarkedQuote.map((quote)=> quote._id)
+
       localStorage.setItem(
         "bookmarked-quotes",
-        JSON.stringify(state.bookmarkedQuotes)
+        JSON.stringify(idArray)
       );
-      console.log(state.bookmarkedQuotes);
     },
   },
 });

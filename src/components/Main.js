@@ -13,6 +13,7 @@ const dispatch = useDispatch()
 
   async function getRandomQuote() {
     setQuoteLoading(true);
+    setBookmark(false);
     fetch("https://api.quotable.io/random?tags=" + tagQuery)
       .then((res) => res.json())
       .then((data) => {
@@ -41,19 +42,19 @@ const dispatch = useDispatch()
       .catch((error) => console.error("Error fetching options:", error));
   }, []);
 
-  // useEffect(() => {
-  //   getRandomQuote();
-  // }, [tagQuery]);
+  useEffect(() => {
+    getRandomQuote();
+  }, [tagQuery]);
 
 
   function handlebookmark(){
     if(bookmark){
       setBookmark(false)
-      dispatch(unbookmarkQuote(randomQuote._id))  
+      dispatch(unbookmarkQuote(randomQuote))  
     }
     else{
       setBookmark((bookmark)=>!bookmark)
-      dispatch(bookmarkQuote(randomQuote._id))
+      dispatch(bookmarkQuote(randomQuote))
     }
   }
 

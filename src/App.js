@@ -9,9 +9,32 @@ import { loadBookmarkedQuotes } from "./slices/quoteSlices";
 function App() {
   const dispatch = useDispatch();
 
+  async function fetchQuotes(bookmarkedQuotes){
+    return new Promise(async function(resolve,reject){
+      const quotes=[];
+
+      for (const id of bookmarkedQuotes) {
+        const response = await fetch(`https://api.quotable.io/quotes/${id}`);
+    
+        if (response.ok) {
+          const quote = await response.json();
+          quotes.push(quote);
+        } else {
+          console.error(`Failed to fetch quote with ID ${id}. Status: ${response.status}`);
+        }
+      }
+      
+      resolve(quotes);
+    })    
+  };
+
   useEffect(() => {
     const storedBookmarkedQuotes =JSON.parse(localStorage.getItem("bookmarked-quotes")) || [];
-    dispatch(loadBookmarkedQuotes(storedBookmarkedQuotes));
+    fetchQuotes(storedBookmarkedQuotes)
+    .then((quotes)=>{
+      dispatch(loadBookmarkedQuotes(quotes))
+    })
+    // dispatch(loadBookmarkedQuotes(storedBookmarkedQuotes));
   }, []);
 
   return (
